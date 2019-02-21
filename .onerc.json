@@ -1,5 +1,7 @@
 {
     "codegen": {
-      "javascript": true
+      "language": "javascript",
+      "framework": "react",
+      "browser": true
     }
   }

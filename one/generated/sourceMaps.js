@@ -1,8 +1,8 @@
-/* @hash 0acfbd7da025be63990ad4a53ebf8622 */
+/* @hash f3f631c00718a0120c9f7a82035f9d34 */
 // tslint:disable
 /* eslint-disable */
-/* @source-map-hash cc70096f3d2aed44b488a9ff9fd1f3ae */
-import { OneClient } from '../../neo-one';
+/* @source-map-hash 495fdbd7c5e192a9423eaeaff21f6c64 */
+import { OneClient } from '@neo-one/client-browserify';
 import { projectID } from './projectID';
 
 let sourceMapsIn = Promise.resolve({});

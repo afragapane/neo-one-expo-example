@@ -12,7 +12,7 @@ import { FromStream } from '@neo-one/react';
 import { concat, defer, of } from 'rxjs';
 
 import { WithContracts } from '../one/generated';
-import { Hash256 } from '../neo-one';
+import { Hash256 } from '@neo-one/client-browserify';
 import { black } from 'ansi-colors';
 
 export default class Participate extends React.Component {

@@ -49,7 +49,7 @@ import {
       codeVersion: '1.0',
       author: 'dicarlo2',
       email: 'alex.dicarlo@neotracker.io',
-      description: 'NEO•ONE ICO',
+      description: 'ICO Contract',
     };
     public readonly name = 'One';
     public readonly symbol = 'ONE';
@@ -72,8 +72,8 @@ import {
     }
   
     @constant
-    public get totalSupply(): Fixed<8> {
-      return this.mutableSupply;
+    public get totalSupply(): Fixed<8> { 
+      return this.mutableSupply; 
     }
   
     @constant

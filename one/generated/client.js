@@ -1,4 +1,4 @@
-/* @hash 35689faf7ac58da3746d9d4f0f3347ab */
+/* @hash 06d76b4d2246060de0dbb326e1e0426b */
 // tslint:disable
 /* eslint-disable */
 import {
@@ -10,7 +10,7 @@ import {
   NEOONEProvider,
   NEOONEOneDataProvider,
   OneClient,
-} from '../../neo-one';
+} from '@neo-one/client-browserify';
 import { projectID } from './projectID';
 
 const getDefaultUserAccountProviders = (provider) => ({
@@ -22,10 +22,17 @@ const getDefaultUserAccountProviders = (provider) => ({
 
 const isLocalUserAccountProvider = (userAccountProvider) => userAccountProvider instanceof LocalUserAccountProvider;
 
-export const createClient = (getUserAccountProviders = getDefaultUserAccountProviders) => {
+export const createClient = (getUserAccountProvidersOrHost) => {
+  let getUserAccountProviders = getDefaultUserAccountProviders;
+  let host = 'localhost';
+  if (typeof getUserAccountProvidersOrHost === 'string') {
+    host = getUserAccountProvidersOrHost;
+  } else if (getUserAccountProvidersOrHost !== undefined) {
+    getUserAccountProviders = getUserAccountProvidersOrHost;
+  }
   const providers = [];
   if (process.env.NODE_ENV !== 'production' || process.env.NEO_ONE_DEV === 'true') {
-    providers.push(new NEOONEOneDataProvider({ network: 'local', host: '10.0.0.9', projectID, port: 40101 }));
+    providers.push(new NEOONEOneDataProvider({ network: 'local', projectID, host, port: 40101 }));
   }
   const provider = new NEOONEProvider(providers);
   const userAccountProviders = getUserAccountProviders(provider);
@@ -103,12 +110,12 @@ export const createClient = (getUserAccountProviders = getDefaultUserAccountProv
   return new Client(userAccountProviders);
 };
 
-export const createDeveloperClients = () => ({
-  local: new DeveloperClient(new NEOONEOneDataProvider({ network: 'local', host: '10.0.0.9', projectID, port: 40101 })),
+export const createDeveloperClients = (host = 'localhost') => ({
+  local: new DeveloperClient(new NEOONEOneDataProvider({ network: 'local', projectID, host, port: 40101 })),
 });
 
-export const createLocalClients = () => {
-  const client = new OneClient(40101, '10.0.0.9');
+export const createLocalClients = (host = 'localhost') => {
+  const client = new OneClient(40101, host);
   return {
     local: {
       getNEOTrackerURL: async () => {
