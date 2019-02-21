@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading, Asset, Font, Icon } from 'expo';
+import { AppLoading, Asset, Constants, Font, Icon } from 'expo';
 import ICO from './components/ICO';
 import { ContractsProvider } from './one/generated';
 
@@ -20,7 +20,7 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <ContractsProvider>
+        <ContractsProvider host={Constants.manifest.hostUri.split(':')[0]}>
           <View style={styles.container}>
             <ICO />
           </View>
